@@ -11,8 +11,10 @@ public class Driver {
     
     public static void main(String[] args) {
 
-        String[] participants = {"Susie", "Kris", "Ralsei", "Burghley", "Noelle", "Bambi", "Eevee"};
-        Arrays.sort(participants);
+        // {"Susie", "Kris", "Ralsei", "Burghley", "Noelle", "Bambi", "Eevee"};
+        //
+        String[] participants = {"Vaporeon", "Jolteon", "Flareon", "Espeon", "Umbreon", "Leafeon", "Glaceon"}; 
+        Arrays.sort(participants); 
         String[] santas = new String[participants.length]; 
         List<String> optimization = new LinkedList<>();
         for (int i = 0; i < participants.length; i++) optimization.add(participants[i]); // well that's annoying
@@ -49,20 +51,26 @@ public class Driver {
         FileWriter fw = null;
         BufferedWriter bw = null;
         File f = null;
+        File dir[] = null;
+
+        dir = (new File("output")).listFiles();
+        for (int i = 0; i < dir.length; i++) {
+            dir[i].delete();  // delete previous santa assignments or else fw refuses to work and also clean up
+        }
 
         for (int i = 0; i < participants.length; i++) {
+            String fileName = participants[i];
             try {
-                String s = "You are " + participants[i] + ". You are giving a gift to " + santas[i] + ".";
-                f = new File("output\\" + participants[i] + ".txt");
-                if (f.exists()) f.delete(); // delete existing santa assignment or else fw refuses to work.
+                String message = "You are " + participants[i] + ". You are giving a gift to " + santas[i] + ".";
+                f = new File("output\\" + fileName);
                 fw = new FileWriter(f);
                 bw = new BufferedWriter(fw);
-                bw.write(s);
+                bw.write(message);
                 bw.close();
-                System.out.println("Successfully created " + participants[i] + ".txt");
+                System.out.println("Successfully created a file named " + fileName);
                 
             } catch (IOException e) {
-                System.out.println("Failed to create " + participants[i] + ".txt");
+                System.out.println("Failed to create a file named " + fileName);
                 e.printStackTrace();
             }
         } 
