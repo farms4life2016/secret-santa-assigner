@@ -12,6 +12,7 @@ public class Driver {
     public static void main(String[] args) {
 
         String[] participants = {"Susie", "Kris", "Ralsei", "Burghley", "Noelle", "Bambi", "Eevee"};
+        Arrays.sort(participants);
         String[] santas = new String[participants.length]; 
         List<String> optimization = new LinkedList<>();
         for (int i = 0; i < participants.length; i++) optimization.add(participants[i]); // well that's annoying
